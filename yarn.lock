@@ -1398,6 +1398,14 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@graphql-codegen/add@1.15.4":
+  version "1.15.4"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/add/-/add-1.15.4.tgz#82d0d4580f0033f8b676494a37a94a031022b9db"
+  integrity sha512-UP8g9yVWcwbGss52OFXcb5ZLFwRJ7sCtg84SHA6ev/Ko6YDEtlVg0HUFtgvhE2HPWBa2iIN8aE9Imk+g8ckl7A==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "1.15.4"
+    tslib "~2.0.0"
+
 "@graphql-codegen/cli@1.15.4":
   version "1.15.4"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-1.15.4.tgz#ec744e8fc41e892ccf8073d76f054312627ce64d"
@@ -4760,6 +4768,11 @@ graphql-config@^3.0.2:
     cosmiconfig "6.0.0"
     minimatch "3.0.4"
     tslib "^1.11.1"
+
+graphql-request@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-2.0.0.tgz#8dd12cf1eb2ce0c80f4114fd851741e091134862"
+  integrity sha512-Ww3Ax+G3l2d+mPT8w7HC9LfrKjutnCKtnDq7ZZp2ghVk5IQDjwAk3/arRF1ix17Ky15rm0hrSKVKxRhIVlSuoQ==
 
 graphql-request@^1.5.0:
   version "1.8.2"
