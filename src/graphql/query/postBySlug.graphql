@@ -1,0 +1,22 @@
+query PostBySlug($slug: String) {
+  post(filter: { slug: { eq: $slug } }) {
+    title
+    slug
+    content
+    date
+    ogImage: coverImage {
+      url(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 })
+    }
+    coverImage {
+      responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
+        ...responsiveImage
+      }
+    }
+    author {
+      name
+      picture {
+        url(imgixParams: { fm: jpg, fit: crop, w: 100, h: 100, sat: -100 })
+      }
+    }
+  }
+}
