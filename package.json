@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "codegen": "graphql-codegen -r dotenv/config"
+    "codegen": "graphql-codegen -r dotenv/config",
+    "lint": "eslint 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "graphql-request": "2.0.0",
