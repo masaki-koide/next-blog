@@ -6,6 +6,7 @@
     "build": "next build",
     "codegen": "graphql-codegen -r dotenv/config",
     "dev": "next dev",
+    "install": "yarn codegen",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "start": "next start"
   },
