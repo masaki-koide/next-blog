@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - https://graphql.datocms.com:
+  - ${CMS_API_URL}:
       headers:
         Authorization: "Bearer ${CMS_API_TOKEN}"
 documents: "src/**/*.graphql"
