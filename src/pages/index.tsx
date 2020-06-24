@@ -1,6 +1,15 @@
 import Head from 'next/head'
+import { NextPage, GetStaticProps } from 'next'
 
-export default function Home() {
+import { sdk } from '../graphql/client'
+import { AllPostsQuery } from '../generated/graphql'
+
+type Props = {
+  allPosts: AllPostsQuery['allPosts']
+}
+
+const Home: NextPage<Props> = ({ allPosts }) => {
+  console.log(allPosts)
   return (
     <div className="container">
       <Head>
@@ -9,6 +18,11 @@ export default function Home() {
       </Head>
 
       <main>
+        {allPosts.map(post => (
+          <a href={`/posts/${post.slug}`} key={post.slug ?? ''}>
+            {post.title}
+          </a>
+        ))}
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -207,3 +221,12 @@ export default function Home() {
     </div>
   )
 }
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const allPosts = await sdk.AllPosts()
+  return {
+    props: { allPosts: allPosts.allPosts },
+  }
+}
+
+export default Home
