@@ -5492,6 +5492,11 @@ internal-slot@^1.0.2:
     has "^1.0.3"
     side-channel "^1.0.2"
 
+intersection-observer@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.10.0.tgz#4d11d63c1ff67e21e62987be24d55218da1a1a69"
+  integrity sha512-fn4bQ0Xq8FTej09YC/jqKZwtijpvARlRp6wxL5WTA6yPe2YWSJ5RJh7Nm79rK2qB0wr6iDQzH60XGq5V/7u8YQ==
+
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -7917,6 +7922,14 @@ randomfill@^1.0.3:
     randombytes "^2.0.5"
     safe-buffer "^5.1.0"
 
+react-datocms@1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/react-datocms/-/react-datocms-1.2.6.tgz#95115d2a4324d0537749f4014357ebbd320bac61"
+  integrity sha512-Ca5amX8yOoiOs2IVHhgnku/UZ1H7sUQJ/ef98wwzv4J6hUNPEbC5k1uy0x12lTiZPHk7TNZL5YOo1L7UmOlKmg==
+  dependencies:
+    intersection-observer "^0.10.0"
+    react-intersection-observer "^8.26.1"
+
 react-dom@16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
@@ -7926,6 +7939,11 @@ react-dom@16.13.1:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.19.1"
+
+react-intersection-observer@^8.26.1:
+  version "8.28.5"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.28.5.tgz#4c44c42740f7a28cb1b3a7182c74b4f05bbe9b67"
+  integrity sha512-Y5oi1+6b8QBvTTczmOYHEAcQ21AU/at5joZUf8L3cNWwnB5fScV0on5I/PiHczHeq9YGG/abXpkjFvaSJIB0Pg==
 
 react-is@16.13.1, react-is@^16.8.1:
   version "16.13.1"
