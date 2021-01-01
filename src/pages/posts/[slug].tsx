@@ -43,7 +43,7 @@ const Post: NextPage<Props> = ({ post }) => {
     <div>
       {imageData && (
         <div>
-          // FIXME:CodegenのMaybeのせいで型がHoge | null | undefinedになってしまう
+          {/* FIXME:CodegenのMaybeのせいで型がHoge | null | undefinedになってしまう */}
           {/* @ts-ignore */}
           <Image data={imageData} />
         </div>
