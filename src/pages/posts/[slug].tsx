@@ -10,14 +10,16 @@ import rehypeReact from 'rehype-react'
 import { Image } from 'react-datocms'
 
 import { sdk } from '../../graphql/client'
-import { PostBySlugQuery } from '../../generated/graphql'
+import { Post } from '../../domain/entity/post'
+import { GetPostInteractor } from '../../domain/usecase/post/getPost'
+import { GqlPostRepository } from '../../domain/usecase/post/gqlRepository'
 
 type UrlQuery = {
   slug: string
 }
 
 type Props = {
-  post: PostBySlugQuery
+  post: Post
 }
 
 function isNotNullable<T>(value: T): value is NonNullable<T> {
@@ -35,20 +37,17 @@ const markdown2react = (markdown: string) => {
   return contents.result as React.ReactElement
 }
 
-const Post: NextPage<Props> = ({ post }) => {
-  console.log(post)
-  const imageData = post?.post?.coverImage?.responsiveImage
+const Component: NextPage<Props> = ({ post }) => {
+  const imageData = post.getCoverImage()?.getResponsiveImage()
 
   return (
     <div>
       {imageData && (
         <div>
-          {/* FIXME:CodegenのMaybeのせいで型がHoge | null | undefinedになってしまう */}
-          {/* @ts-ignore */}
           <Image data={imageData} />
         </div>
       )}
-      <div>{markdown2react(post?.post?.content ?? '')}</div>
+      <div>{markdown2react(post.getContent())}</div>
     </div>
   )
 }
@@ -71,11 +70,16 @@ export const getStaticProps: GetStaticProps<
   UrlQuery
 > = async context => {
   const slug = context.params?.slug
-  const result = await sdk.PostBySlug({ slug })
+  if (!slug) {
+    throw Error(`Invalid post slug: ${slug}`)
+  }
+
+  const interactor = new GetPostInteractor(new GqlPostRepository(sdk))
+  const result = await interactor.handle({ slug })
 
   return {
     props: { post: result },
   }
 }
 
-export default Post
+export default Component
