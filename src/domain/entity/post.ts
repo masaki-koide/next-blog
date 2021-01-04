@@ -1,5 +1,6 @@
 import { PostBySlugQuery } from '../../generated/graphql'
 
+import { Unserializable } from './common/unserializable'
 import { CoverImage, CoverImageDto } from './coverImage'
 
 export type PostDto = {
@@ -11,7 +12,7 @@ export type PostDto = {
   coverImage: CoverImageDto | null
 }
 
-export class Post {
+export class Post implements Unserializable<PostDto> {
   #slug: string
 
   #title: string
@@ -47,7 +48,7 @@ export class Post {
       : null
   }
 
-  toObject(): PostDto {
+  toObject() {
     return {
       slug: this.#slug,
       title: this.#title,
