@@ -1,12 +1,5 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import unified from 'unified'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import rehypeHighlight from 'rehype-highlight'
-import rehypeReact from 'rehype-react'
 import { Image } from 'react-datocms'
 
 import { sdk } from '../../graphql/client'
@@ -14,6 +7,7 @@ import { Post } from '../../domain/entity/post'
 import { GetPostInteractor } from '../../domain/usecase/post/getPost'
 import { GetPostSummariesInteractor } from '../../domain/usecase/post/getPostSummaries'
 import { GqlPostRepository } from '../../domain/usecase/post/gqlRepository'
+import { markdown2react } from '../../utils/markdown'
 
 type UrlQuery = {
   slug: string
@@ -26,17 +20,6 @@ type Props = {
 // function isNotNullable<T>(value: T): value is NonNullable<T> {
 //   return value !== undefined && value !== null
 // }
-
-const proceccor = unified()
-  .use(remarkParse)
-  .use(remarkRehype)
-  .use(rehypeHighlight)
-  .use(rehypeReact, { createElement: React.createElement })
-
-const markdown2react = (markdown: string) => {
-  const contents = proceccor.processSync(markdown)
-  return contents.result as React.ReactElement
-}
 
 const Component: NextPage<Props> = ({ post }) => {
   const imageData = post.getCoverImage()?.getResponsiveImage()
