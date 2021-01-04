@@ -1,0 +1,9 @@
+query PostsPerPage {
+  allPosts(orderBy: date_DESC, first: 20) {
+    id
+    slug
+    title
+    date
+    excerpt
+  }
+}

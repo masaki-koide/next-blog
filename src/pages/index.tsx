@@ -1,15 +1,17 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { NextPage, GetStaticProps } from 'next'
 
 import { sdk } from '../graphql/client'
-import { AllPostsQuery } from '../generated/graphql'
+import { GetPostSummariesInteractor } from '../domain/usecase/post/getPostSummaries'
+import { GqlPostRepository } from '../domain/usecase/post/gqlRepository'
+import { PostSummaryDto } from '../domain/entity/postSummary'
 
 type Props = {
-  allPosts: AllPostsQuery['allPosts']
+  posts: PostSummaryDto[]
 }
 
-const Home: NextPage<Props> = ({ allPosts }) => {
-  console.log(allPosts)
+const Home: NextPage<Props> = ({ posts }) => {
   return (
     <div className="container">
       <Head>
@@ -18,10 +20,10 @@ const Home: NextPage<Props> = ({ allPosts }) => {
       </Head>
 
       <main>
-        {allPosts.map(post => (
-          <a href={`/posts/${post.slug}`} key={post.slug ?? ''}>
+        {posts.map(post => (
+          <Link href={`/posts/${post.slug}`} key={post.slug ?? ''}>
             {post.title}
-          </a>
+          </Link>
         ))}
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
@@ -223,9 +225,11 @@ const Home: NextPage<Props> = ({ allPosts }) => {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const allPosts = await sdk.AllPosts()
+  const interactor = new GetPostSummariesInteractor(new GqlPostRepository(sdk))
+  const posts = await interactor.handle()
+
   return {
-    props: { allPosts: allPosts.allPosts },
+    props: { posts },
   }
 }
 

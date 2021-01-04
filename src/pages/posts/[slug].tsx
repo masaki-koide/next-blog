@@ -1,63 +1,46 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import unified from 'unified'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import rehypeHighlight from 'rehype-highlight'
-import rehypeReact from 'rehype-react'
 import { Image } from 'react-datocms'
 
 import { sdk } from '../../graphql/client'
-import { PostBySlugQuery } from '../../generated/graphql'
+import { PostDto } from '../../domain/entity/post'
+import { GetPostInteractor } from '../../domain/usecase/post/getPost'
+import { GetPostSummariesInteractor } from '../../domain/usecase/post/getPostSummaries'
+import { GqlPostRepository } from '../../domain/usecase/post/gqlRepository'
+import { markdown2react } from '../../utils/markdown'
 
 type UrlQuery = {
   slug: string
 }
 
 type Props = {
-  post: PostBySlugQuery
+  post: PostDto
 }
 
-function isNotNullable<T>(value: T): value is NonNullable<T> {
-  return value !== undefined && value !== null
-}
+// function isNotNullable<T>(value: T): value is NonNullable<T> {
+//   return value !== undefined && value !== null
+// }
 
-const proceccor = unified()
-  .use(remarkParse)
-  .use(remarkRehype)
-  .use(rehypeHighlight)
-  .use(rehypeReact, { createElement: React.createElement })
-
-const markdown2react = (markdown: string) => {
-  const contents = proceccor.processSync(markdown)
-  return contents.result as React.ReactElement
-}
-
-const Post: NextPage<Props> = ({ post }) => {
-  console.log(post)
-  const imageData = post?.post?.coverImage?.responsiveImage
+const Component: NextPage<Props> = ({ post }) => {
+  const imageData = post.coverImage?.responsiveImage
 
   return (
     <div>
       {imageData && (
         <div>
-          {/* FIXME:CodegenのMaybeのせいで型がHoge | null | undefinedになってしまう */}
-          {/* @ts-ignore */}
           <Image data={imageData} />
         </div>
       )}
-      <div>{markdown2react(post?.post?.content ?? '')}</div>
+      <div>{markdown2react(post.content)}</div>
     </div>
   )
 }
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
-  const result = await sdk.AllPostsSlug()
-  const allSlug = result.allPosts.map(post => post.slug).filter(isNotNullable)
-  const paths = allSlug.map(slug => ({
-    params: { slug },
+  const interactor = new GetPostSummariesInteractor(new GqlPostRepository(sdk))
+  const posts = await interactor.handle()
+  const paths = posts.map(post => ({
+    params: { slug: post.slug },
   }))
 
   return {
@@ -71,11 +54,16 @@ export const getStaticProps: GetStaticProps<
   UrlQuery
 > = async context => {
   const slug = context.params?.slug
-  const result = await sdk.PostBySlug({ slug })
+  if (!slug) {
+    throw Error(`Invalid post slug: ${slug}`)
+  }
+
+  const interactor = new GetPostInteractor(new GqlPostRepository(sdk))
+  const result = await interactor.handle({ slug })
 
   return {
     props: { post: result },
   }
 }
 
-export default Post
+export default Component
