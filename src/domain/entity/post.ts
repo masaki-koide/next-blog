@@ -1,6 +1,15 @@
 import { PostBySlugQuery } from '../../generated/graphql'
 
-import { CoverImage } from './coverImage'
+import { CoverImage, CoverImageDto } from './coverImage'
+
+export type PostDto = {
+  slug: string
+  title: string
+  date: string
+  excerpt: string
+  content: string
+  coverImage: CoverImageDto | null
+}
 
 export class Post {
   #slug: string
@@ -13,7 +22,7 @@ export class Post {
 
   #content: string
 
-  #coverImage?: CoverImage
+  #coverImage: CoverImage | null
 
   constructor(post: NonNullable<PostBySlugQuery['post']>) {
     if (
@@ -35,18 +44,17 @@ export class Post {
     const responsiveImage = post.coverImage?.responsiveImage
     this.#coverImage = responsiveImage
       ? new CoverImage({ responsiveImage })
-      : undefined
+      : null
   }
 
-  getDate() {
-    return this.#date.toLocaleDateString()
-  }
-
-  getContent() {
-    return this.#content
-  }
-
-  getCoverImage() {
-    return this.#coverImage
+  toObject(): PostDto {
+    return {
+      slug: this.#slug,
+      title: this.#title,
+      date: this.#date.toLocaleDateString(),
+      excerpt: this.#excerpt,
+      content: this.#content,
+      coverImage: this.#coverImage?.toObject() ?? null,
+    }
   }
 }

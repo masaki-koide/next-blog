@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { Image } from 'react-datocms'
 
 import { sdk } from '../../graphql/client'
-import { Post } from '../../domain/entity/post'
+import { PostDto } from '../../domain/entity/post'
 import { GetPostInteractor } from '../../domain/usecase/post/getPost'
 import { GetPostSummariesInteractor } from '../../domain/usecase/post/getPostSummaries'
 import { GqlPostRepository } from '../../domain/usecase/post/gqlRepository'
@@ -14,7 +14,7 @@ type UrlQuery = {
 }
 
 type Props = {
-  post: Post
+  post: PostDto
 }
 
 // function isNotNullable<T>(value: T): value is NonNullable<T> {
@@ -22,7 +22,7 @@ type Props = {
 // }
 
 const Component: NextPage<Props> = ({ post }) => {
-  const imageData = post.getCoverImage()?.getResponsiveImage()
+  const imageData = post.coverImage?.responsiveImage
 
   return (
     <div>
@@ -31,7 +31,7 @@ const Component: NextPage<Props> = ({ post }) => {
           <Image data={imageData} />
         </div>
       )}
-      <div>{markdown2react(post.getContent())}</div>
+      <div>{markdown2react(post.content)}</div>
     </div>
   )
 }
@@ -40,7 +40,7 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   const interactor = new GetPostSummariesInteractor(new GqlPostRepository(sdk))
   const posts = await interactor.handle()
   const paths = posts.map(post => ({
-    params: { slug: post.getSlug() },
+    params: { slug: post.slug },
   }))
 
   return {

@@ -1,6 +1,15 @@
 import { PostsPerPageQuery } from '../../generated/graphql'
 
-export class PostSummary {
+import { Unserializable } from './common/unserializable'
+
+export type PostSummaryDto = {
+  slug: string
+  title: string
+  date: string
+  excerpt: string
+}
+
+export class PostSummary implements Unserializable<PostSummaryDto> {
   #slug: string
 
   #title: string
@@ -20,19 +29,12 @@ export class PostSummary {
     this.#excerpt = post.excerpt
   }
 
-  getSlug() {
-    return this.#slug
-  }
-
-  getTitle() {
-    return this.#title
-  }
-
-  getDate() {
-    return this.#date.toLocaleDateString()
-  }
-
-  getExcerpt() {
-    return this.#excerpt
+  toObject() {
+    return {
+      slug: this.#slug,
+      title: this.#title,
+      date: this.#date.toLocaleDateString(),
+      excerpt: this.#excerpt,
+    }
   }
 }

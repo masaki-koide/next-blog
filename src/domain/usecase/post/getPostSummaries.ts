@@ -10,6 +10,6 @@ export class GetPostSummariesInteractor implements GetPostSummariesUsecase {
 
   async handle() {
     const posts = await this.#postRepository.getSummaries()
-    return posts
+    return posts.map(post => post.toObject())
   }
 }

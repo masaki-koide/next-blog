@@ -1,15 +1,21 @@
 import { ResponsiveImageFragment } from '../../generated/graphql'
 
-import { ResponsiveImage } from './responsiveImage'
+import { Unserializable } from './common/unserializable'
+import { ResponsiveImage, ResponsiveImageDto } from './responsiveImage'
 
-export class CoverImage {
+export type CoverImageDto = {
+  responsiveImage: ResponsiveImageDto
+}
+export class CoverImage implements Unserializable<CoverImageDto> {
   #responsiveImage: ResponsiveImage
 
   constructor(coverImage: { responsiveImage: ResponsiveImageFragment }) {
     this.#responsiveImage = new ResponsiveImage(coverImage.responsiveImage)
   }
 
-  getResponsiveImage() {
-    return this.#responsiveImage
+  toObject() {
+    return {
+      responsiveImage: this.#responsiveImage.toObject(),
+    }
   }
 }

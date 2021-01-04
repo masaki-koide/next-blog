@@ -10,6 +10,6 @@ export class GetPostInteractor implements GetPostUsecase {
 
   async handle({ slug }: { slug: string }) {
     const post = await this.#postRepository.getBySlug(slug)
-    return post
+    return post.toObject()
   }
 }

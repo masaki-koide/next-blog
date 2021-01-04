@@ -5,10 +5,10 @@ import { NextPage, GetStaticProps } from 'next'
 import { sdk } from '../graphql/client'
 import { GetPostSummariesInteractor } from '../domain/usecase/post/getPostSummaries'
 import { GqlPostRepository } from '../domain/usecase/post/gqlRepository'
-import { PostSummary } from '../domain/entity/postSummary'
+import { PostSummaryDto } from '../domain/entity/postSummary'
 
 type Props = {
-  posts: PostSummary[]
+  posts: PostSummaryDto[]
 }
 
 const Home: NextPage<Props> = ({ posts }) => {
@@ -21,8 +21,8 @@ const Home: NextPage<Props> = ({ posts }) => {
 
       <main>
         {posts.map(post => (
-          <Link href={`/posts/${post.getSlug()}`} key={post.getSlug() ?? ''}>
-            {post.getTitle()}
+          <Link href={`/posts/${post.slug}`} key={post.slug ?? ''}>
+            {post.title}
           </Link>
         ))}
         <h1 className="title">
