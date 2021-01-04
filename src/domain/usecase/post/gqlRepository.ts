@@ -1,5 +1,6 @@
 import { Sdk } from '../../../generated/graphql'
 import { Post } from '../../entity/post'
+import { PostSummary } from '../../entity/postSummary'
 
 import { PostRepository } from './interface/repository'
 
@@ -17,5 +18,12 @@ export class GqlPostRepository implements PostRepository {
     }
 
     return new Post(post)
+  }
+
+  async getSummaries() {
+    const { allPosts } = await this.#sdk.PostsPerPage()
+    const posts = allPosts.map(post => new PostSummary(post))
+
+    return posts
   }
 }

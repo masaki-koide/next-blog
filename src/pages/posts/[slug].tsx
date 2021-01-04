@@ -12,6 +12,7 @@ import { Image } from 'react-datocms'
 import { sdk } from '../../graphql/client'
 import { Post } from '../../domain/entity/post'
 import { GetPostInteractor } from '../../domain/usecase/post/getPost'
+import { GetPostSummariesInteractor } from '../../domain/usecase/post/getPostSummaries'
 import { GqlPostRepository } from '../../domain/usecase/post/gqlRepository'
 
 type UrlQuery = {
@@ -22,9 +23,9 @@ type Props = {
   post: Post
 }
 
-function isNotNullable<T>(value: T): value is NonNullable<T> {
-  return value !== undefined && value !== null
-}
+// function isNotNullable<T>(value: T): value is NonNullable<T> {
+//   return value !== undefined && value !== null
+// }
 
 const proceccor = unified()
   .use(remarkParse)
@@ -53,10 +54,10 @@ const Component: NextPage<Props> = ({ post }) => {
 }
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
-  const result = await sdk.AllPostsSlug()
-  const allSlug = result.allPosts.map(post => post.slug).filter(isNotNullable)
-  const paths = allSlug.map(slug => ({
-    params: { slug },
+  const interactor = new GetPostSummariesInteractor(new GqlPostRepository(sdk))
+  const posts = await interactor.handle()
+  const paths = posts.map(post => ({
+    params: { slug: post.getSlug() },
   }))
 
   return {
