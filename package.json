@@ -13,7 +13,7 @@
   "dependencies": {
     "graphql-request": "3.4.0",
     "highlight.js": "10.7.2",
-    "next": "10.0.4",
+    "next": "10.2.3",
     "normalize.css": "8.0.1",
     "react": "17.0.1",
     "react-datocms": "1.6.3",
