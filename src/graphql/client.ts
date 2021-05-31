@@ -5,7 +5,7 @@ import { getSdk } from '../generated/graphql'
 if (!process.env.CMS_API_URL || !process.env.CMS_API_TOKEN) {
   // eslint-disable-next-line no-console -- Due to build time error
   console.error(
-    '🥺The environment variable CMS_API_URL and CMS_API_TOKEN is not set.'
+    '🥺The environment variables CMS_API_URL and CMS_API_TOKEN are not set.'
   )
   process.exit(1)
 }

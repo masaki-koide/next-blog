@@ -1,5 +1,11 @@
 type Serializable = {
-  [key in string]: string | number | boolean | null | Serializable
+  [key in string]:
+    | string
+    | number
+    | boolean
+    | null
+    | Serializable
+    | Array<Serializable>
 }
 
 /**

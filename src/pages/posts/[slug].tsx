@@ -8,6 +8,7 @@ import { GetPostInteractor } from '../../domain/usecase/post/getPost'
 import { GetPostSummariesInteractor } from '../../domain/usecase/post/getPostSummaries'
 import { GqlPostRepository } from '../../domain/usecase/post/gqlRepository'
 import { markdown2react } from '../../utils/markdown'
+import { MetaTags } from '../../components/MetaTags'
 
 type UrlQuery = {
   slug: string
@@ -26,6 +27,7 @@ const Component: NextPage<Props> = ({ post }) => {
 
   return (
     <div>
+      <MetaTags metaTags={post.metaTags} />
       {imageData && (
         <div>
           <Image data={imageData} />
