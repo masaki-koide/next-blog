@@ -1,0 +1,43 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+defaults:
+  runs-on: ubuntu-latest
+  strategy:
+    matrix:
+      node-version: [14.x]
+
+jobs:
+  type-check:
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Display version of Node.js, npm, yarn
+        run: |
+          node -v
+          npm -v
+          yarn --version
+      - run: yarn
+      - run: yarn type-check
+
+  lint:
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Display version of Node.js, npm, yarn
+        run: |
+          node -v
+          npm -v
+          yarn --version
+      - run: yarn
+      - run: yarn lint
