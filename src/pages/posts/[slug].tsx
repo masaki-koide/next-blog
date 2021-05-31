@@ -51,21 +51,19 @@ export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<
-  Props,
-  UrlQuery
-> = async context => {
-  const slug = context.params?.slug
-  if (!slug) {
-    throw Error(`Invalid post slug: ${slug}`)
-  }
+export const getStaticProps: GetStaticProps<Props, UrlQuery> =
+  async context => {
+    const slug = context.params?.slug
+    if (!slug) {
+      throw Error(`Invalid post slug: ${slug}`)
+    }
 
-  const interactor = new GetPostInteractor(new GqlPostRepository(sdk))
-  const result = await interactor.handle({ slug })
+    const interactor = new GetPostInteractor(new GqlPostRepository(sdk))
+    const result = await interactor.handle({ slug })
 
-  return {
-    props: { post: result },
+    return {
+      props: { post: result },
+    }
   }
-}
 
 export default Component
