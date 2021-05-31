@@ -4,6 +4,9 @@ on:
     branches:
       - master
   pull_request:
+env:
+  CMS_API_URL: ${{ secrets.CMS_API_URL }}
+  CMS_API_TOKEN: ${{ secrets.CMS_API_TOKEN }}
 
 jobs:
   type-check:
