@@ -5,15 +5,13 @@ on:
       - master
   pull_request:
 
-defaults:
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      node-version: [14.x]
-
 jobs:
   type-check:
     timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -29,6 +27,10 @@ jobs:
 
   lint:
     timeout-minutes: 10
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
