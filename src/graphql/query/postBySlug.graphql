@@ -6,20 +6,17 @@ query PostBySlug($slug: String) {
     date
     excerpt
     content
+
     coverImage {
       responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
         ...responsiveImage
       }
     }
-    seoSettings {
-      title
-      description
-      twitterCard
-      image {
-        responsiveImage(imgixParams: { fm: jpg, fit: crop, w: 2000, h: 1000 }) {
-          ...responsiveImage
-        }
-      }
+
+    metaTags: _seoMetaTags {
+      attributes
+      content
+      tag
     }
   }
 }

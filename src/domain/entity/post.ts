@@ -2,6 +2,7 @@ import { PostBySlugQuery } from '../../generated/graphql'
 
 import { Unserializable } from './common/unserializable'
 import { CoverImage, CoverImageDto } from './coverImage'
+import { MetaTag, MetaTagDto } from './metaTag'
 
 export type PostDto = {
   slug: string
@@ -10,6 +11,7 @@ export type PostDto = {
   excerpt: string
   content: string
   coverImage: CoverImageDto | null
+  metaTags: MetaTagDto[]
 }
 
 export class Post implements Unserializable<PostDto> {
@@ -24,6 +26,8 @@ export class Post implements Unserializable<PostDto> {
   #content: string
 
   #coverImage: CoverImage | null
+
+  #metaTags: MetaTag[]
 
   constructor(post: NonNullable<PostBySlugQuery['post']>) {
     if (
@@ -46,6 +50,8 @@ export class Post implements Unserializable<PostDto> {
     this.#coverImage = responsiveImage
       ? new CoverImage({ responsiveImage })
       : null
+
+    this.#metaTags = post.metaTags.map(metaTag => new MetaTag(metaTag))
   }
 
   toObject() {
@@ -56,6 +62,7 @@ export class Post implements Unserializable<PostDto> {
       excerpt: this.#excerpt,
       content: this.#content,
       coverImage: this.#coverImage?.toObject() ?? null,
+      metaTags: this.#metaTags.map(metaTag => metaTag.toObject()),
     }
   }
 }
