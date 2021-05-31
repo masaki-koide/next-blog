@@ -25,11 +25,11 @@
     "unified": "9.2.1"
   },
   "devDependencies": {
-    "@graphql-codegen/add": "1.17.7",
+    "@graphql-codegen/add": "2.0.2",
     "@graphql-codegen/cli": "1.21.5",
     "@graphql-codegen/introspection": "1.18.2",
     "@graphql-codegen/typescript": "1.22.1",
-    "@graphql-codegen/typescript-graphql-request": "1.17.7",
+    "@graphql-codegen/typescript-graphql-request": "3.2.1",
     "@graphql-codegen/typescript-operations": "1.18.0",
     "@types/node": "14.17.1",
     "@types/react": "17.0.8",
