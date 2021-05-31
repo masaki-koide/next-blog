@@ -8,7 +8,8 @@
     "dev": "next dev",
     "install": "yarn codegen",
     "lint": "eslint './src/**/*.{ts,tsx}'",
-    "start": "next start"
+    "start": "next start",
+    "type-check": "tsc"
   },
   "dependencies": {
     "graphql-request": "3.4.0",
