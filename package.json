@@ -8,6 +8,7 @@
     "dev": "next dev",
     "install": "yarn codegen",
     "lint": "eslint './src/**/*.{ts,tsx}'",
+    "prepare": "husky install",
     "start": "next start",
     "type-check": "tsc"
   },
@@ -37,16 +38,11 @@
     "eslint": "7.27.0",
     "eslint-config-thai-soup": "1.1.0",
     "graphql": "15.5.0",
-    "husky": "6.0.0",
-    "lint-staged": "10.5.4",
+    "husky": "^6.0.0",
+    "lint-staged": "11.0.0",
     "prettier": "2.3.0",
     "prettier-package-json": "2.6.0",
     "typescript": "4.3.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.{ts.tsx}": "eslint --fix",
