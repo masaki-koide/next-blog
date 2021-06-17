@@ -1,3 +1,4 @@
+import { sdk } from '../../../graphql/client'
 import { Sdk } from '../../../generated/graphql'
 import { Post } from '../../entity/post'
 import { PostSummary } from '../../entity/postSummary'
@@ -7,7 +8,7 @@ import { PostRepository } from './interface/repository'
 export class GqlPostRepository implements PostRepository {
   #sdk: Sdk
 
-  constructor(sdk: Sdk) {
+  constructor() {
     this.#sdk = sdk
   }
 

@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { AppProps } from 'next/app'
 import 'normalize.css'
 import 'highlight.js/styles/github.css'

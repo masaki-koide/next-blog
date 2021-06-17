@@ -2,9 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { NextPage, GetStaticProps } from 'next'
 
-import { sdk } from '../graphql/client'
-import { GetPostSummariesInteractor } from '../domain/usecase/post/getPostSummaries'
-import { GqlPostRepository } from '../domain/usecase/post/gqlRepository'
+import { getPostSummariesInteractor } from '../di/container'
 import { PostSummaryDto } from '../domain/entity/postSummary'
 
 type Props = {
@@ -225,8 +223,7 @@ const Home: NextPage<Props> = ({ posts }) => {
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const interactor = new GetPostSummariesInteractor(new GqlPostRepository(sdk))
-  const posts = await interactor.handle()
+  const posts = await getPostSummariesInteractor.handle()
 
   return {
     props: { posts },
