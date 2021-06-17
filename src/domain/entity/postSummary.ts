@@ -20,7 +20,7 @@ export class PostSummary implements Unserializable<PostSummaryDto> {
 
   constructor(post: NonNullable<PostsPerPageQuery['allPosts'][number]>) {
     if (!post.slug || !post.title || !post.date || !post.excerpt) {
-      throw Error(`Invalid post data: ${post}`)
+      throw Error(`Invalid post data: ${JSON.stringify(post)}`)
     }
 
     this.#slug = post.slug

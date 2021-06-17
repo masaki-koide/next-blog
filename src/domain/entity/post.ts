@@ -37,7 +37,7 @@ export class Post implements Unserializable<PostDto> {
       !post.excerpt ||
       !post.content
     ) {
-      throw Error(`Invalid post data: ${post}`)
+      throw Error(`Invalid post data: ${JSON.stringify(post)}`)
     }
 
     this.#slug = post.slug

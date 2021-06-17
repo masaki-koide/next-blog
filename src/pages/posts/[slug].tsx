@@ -41,8 +41,8 @@ const Component: NextPage<Props> = ({ post }) => {
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
   const interactor = new GetPostSummariesInteractor(new GqlPostRepository(sdk))
   const posts = await interactor.handle()
-  const paths = posts.map(post => ({
-    params: { slug: post.slug },
+  const paths = posts.map(({ slug }) => ({
+    params: { slug },
   }))
 
   return {
@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps<Props, UrlQuery> =
   async context => {
     const slug = context.params?.slug
     if (!slug) {
-      throw Error(`Invalid post slug: ${slug}`)
+      throw Error(`Post slug is not found`)
     }
 
     const interactor = new GetPostInteractor(new GqlPostRepository(sdk))
