@@ -2,11 +2,11 @@ import React from 'react'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { Image } from 'react-datocms'
 
-import { sdk } from '../../graphql/client'
 import { PostDto } from '../../domain/entity/post'
-import { GetPostInteractor } from '../../domain/usecase/post/getPost'
-import { GetPostSummariesInteractor } from '../../domain/usecase/post/getPostSummaries'
-import { GqlPostRepository } from '../../domain/usecase/post/gqlRepository'
+import {
+  getPostInteractor,
+  getPostSummariesInteractor,
+} from '../../di/container'
 import { markdown2react } from '../../utils/markdown'
 import { MetaTags } from '../../components/MetaTags'
 
@@ -17,10 +17,6 @@ type UrlQuery = {
 type Props = {
   post: PostDto
 }
-
-// function isNotNullable<T>(value: T): value is NonNullable<T> {
-//   return value !== undefined && value !== null
-// }
 
 const Component: NextPage<Props> = ({ post }) => {
   const imageData = post.coverImage?.responsiveImage
@@ -39,8 +35,7 @@ const Component: NextPage<Props> = ({ post }) => {
 }
 
 export const getStaticPaths: GetStaticPaths<UrlQuery> = async () => {
-  const interactor = new GetPostSummariesInteractor(new GqlPostRepository(sdk))
-  const posts = await interactor.handle()
+  const posts = await getPostSummariesInteractor.handle()
   const paths = posts.map(({ slug }) => ({
     params: { slug },
   }))
@@ -58,8 +53,7 @@ export const getStaticProps: GetStaticProps<Props, UrlQuery> =
       throw Error(`Post slug is not found`)
     }
 
-    const interactor = new GetPostInteractor(new GqlPostRepository(sdk))
-    const result = await interactor.handle({ slug })
+    const result = await getPostInteractor.handle({ slug })
 
     return {
       props: { post: result },
