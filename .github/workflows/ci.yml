@@ -4,6 +4,8 @@ on:
     branches:
       - master
   pull_request:
+  # see: https://github.com/dependabot/dependabot-core/issues/3253#issuecomment-797125425
+  pull_request_target:
 env:
   CMS_API_URL: ${{ secrets.CMS_API_URL }}
   CMS_API_TOKEN: ${{ secrets.CMS_API_TOKEN }}
@@ -15,8 +17,18 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+    if: |
+      (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') ||
+      (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]')
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        if: ${{ github.event_name != 'pull_request_target' }}
+        uses: actions/checkout@v2
+      - name: Checkout PR
+        if: ${{ github.event_name == 'pull_request_target' }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
@@ -34,8 +46,18 @@ jobs:
     strategy:
       matrix:
         node-version: [14.x]
+    if: |
+      (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]') ||
+      (github.event_name != 'pull_request_target' && github.actor != 'dependabot[bot]')
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        if: ${{ github.event_name != 'pull_request_target' }}
+        uses: actions/checkout@v2
+      - name: Checkout PR
+        if: ${{ github.event_name == 'pull_request_target' }}
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
