@@ -41,7 +41,7 @@
     "babel-plugin-transform-typescript-metadata": "0.3.2",
     "eslint": "7.27.0",
     "eslint-config-thai-soup": "1.1.0",
-    "graphql": "15.5.0",
+    "graphql": "15.5.1",
     "husky": "6.0.0",
     "lint-staged": "11.0.0",
     "prettier": "2.3.0",
