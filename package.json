@@ -15,7 +15,7 @@
   "dependencies": {
     "graphql-request": "3.4.0",
     "highlight.js": "10.7.2",
-    "next": "11.1.0",
+    "next": "11.1.2",
     "normalize.css": "8.0.1",
     "react": "17.0.2",
     "react-datocms": "1.6.3",
