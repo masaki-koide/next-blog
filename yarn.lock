@@ -5941,10 +5941,10 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-datocms@1.6.8:
-  version "1.6.8"
-  resolved "https://registry.yarnpkg.com/react-datocms/-/react-datocms-1.6.8.tgz#c9d8738efe88822694d69950b734adb335473632"
-  integrity sha512-XSO/4K9QtST1/M2aSG5/PR70KJgCmTc6tF2gnSdjuhKpPSp6cLj1gDE3tXsY7QIWVvOTA/ZEbvjKXJyiXQUx8w==
+react-datocms@1.6.9:
+  version "1.6.9"
+  resolved "https://registry.yarnpkg.com/react-datocms/-/react-datocms-1.6.9.tgz#bde85b5d5ea44e91259ecb2e780b7ce150aa6778"
+  integrity sha512-6INSMtsuXaaLAaPpaCHwUWXl7c8JlmoJqIXz8VgGJTbvPtAL1kjedUZSLMTmyOjHMUkM0YVfWIEOQ4mHs/UdDg==
   dependencies:
     datocms-listen "^0.1.6"
     datocms-structured-text-generic-html-renderer "^1.1.0"
