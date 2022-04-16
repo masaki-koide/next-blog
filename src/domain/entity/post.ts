@@ -29,6 +29,7 @@ export class Post implements Unserializable<PostDto> {
 
   #metaTags: MetaTag[]
 
+  // FIXME:GraphQLに依存させない
   constructor(post: NonNullable<PostBySlugQuery['post']>) {
     if (
       !post.slug ||
