@@ -13,7 +13,9 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "glob": "8.0.1",
     "graphql-request": "3.6.1",
+    "gray-matter": "4.0.3",
     "highlight.js": "11.3.1",
     "next": "12.1.0",
     "normalize.css": "8.0.1",
@@ -36,6 +38,7 @@
     "@graphql-codegen/typescript": "2.4.2",
     "@graphql-codegen/typescript-graphql-request": "4.3.3",
     "@graphql-codegen/typescript-operations": "2.2.2",
+    "@types/glob": "7.2.0",
     "@types/node": "14.18.13",
     "@types/react": "17.0.44",
     "babel-plugin-transform-typescript-metadata": "0.3.2",
