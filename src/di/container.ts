@@ -1,7 +1,7 @@
 import { container } from 'tsyringe'
 
 import {
-  GqlPostRepository,
+  FilePostRepository,
   GetPostInteractor,
   GetPostSummariesInteractor,
 } from '../domain/usecase/post'
@@ -9,7 +9,7 @@ import {
 import { injectionTokens } from './token'
 
 container.register(injectionTokens.postRepository, {
-  useClass: GqlPostRepository,
+  useClass: FilePostRepository,
 })
 
 const getPostInteractor = container.resolve(GetPostInteractor)

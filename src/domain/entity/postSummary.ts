@@ -18,6 +18,7 @@ export class PostSummary implements Unserializable<PostSummaryDto> {
 
   #excerpt: string
 
+  // FIXME:GraphQLに依存させない
   constructor(post: NonNullable<PostsPerPageQuery['allPosts'][number]>) {
     if (!post.slug || !post.title || !post.date || !post.excerpt) {
       throw Error(`Invalid post data: ${JSON.stringify(post)}`)
