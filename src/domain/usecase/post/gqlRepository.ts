@@ -18,12 +18,28 @@ export class GqlPostRepository implements PostRepository {
       throw Error(`Not found post by slug: ${slug}`)
     }
 
-    return new Post(post)
+    return new Post({
+      slug: post.slug ?? '',
+      title: post.title ?? '',
+      date: post.date,
+      excerpt: post.excerpt ?? '',
+      content: post.content ?? '',
+      coverImage: post.coverImage,
+      metaTags: post.metaTags,
+    })
   }
 
   async getSummaries() {
     const { allPosts } = await this.#sdk.PostsPerPage()
-    const posts = allPosts.map(post => new PostSummary(post))
+    const posts = allPosts.map(
+      post =>
+        new PostSummary({
+          slug: post.slug ?? '',
+          title: post.title ?? '',
+          date: post.date,
+          excerpt: post.excerpt ?? '',
+        })
+    )
 
     return posts
   }
