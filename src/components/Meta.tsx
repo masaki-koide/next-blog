@@ -17,6 +17,8 @@ export function Meta({
   const router = useRouter()
   const url = DOMAIN + router.asPath
   const pageTitle = title ? `${title} | ${TITLE}` : TITLE
+  const encodedOgImageText = encodeURIComponent(title ?? TITLE)
+  const ogImageUrl = `https://og-image.markey-dev.com/${encodedOgImageText}.jpeg?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F34389937`
 
   return (
     <Head>
@@ -33,7 +35,7 @@ export function Meta({
       <meta content={TITLE} property="og:site_name" />
       <meta content={url} property="og:url" />
       <meta content={type} property="og:type" />
-      {/* <meta property="og:image" content="画像URL" /> */}
+      <meta content={ogImageUrl} property="og:image" />
 
       <meta content="summary_large_image" name="twitter:card" />
       <meta content="@markey_koichan" name="twitter:site" />
