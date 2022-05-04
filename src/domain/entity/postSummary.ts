@@ -53,7 +53,9 @@ export class PostSummary implements Unserializable<PostSummaryDto> {
     return {
       slug: this.#slug,
       title: this.#title,
-      date: this.#date.toLocaleDateString('ja-JP'),
+      date: `${this.#date.getFullYear()}/${
+        this.#date.getMonth() + 1
+      }/${this.#date.getDate()}`,
       excerpt: this.#excerpt,
       externalSite: this.#externalSite,
       url: this.#url,
