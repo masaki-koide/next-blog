@@ -23,6 +23,8 @@ export class GetPostSummariesInteractor implements GetPostSummariesUsecase {
     return posts
       .flat()
       .map(post => post.toObject())
-      .sort((a, b) => (a.date > b.date ? -1 : 1))
+      .sort((a, b) =>
+        new Date(a.date).getTime() > new Date(b.date).getTime() ? -1 : 1
+      )
   }
 }
