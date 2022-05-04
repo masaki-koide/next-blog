@@ -1,6 +1,5 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import { Image } from 'react-datocms'
 
 import { PostDto } from '../../domain/entity/post'
 import {
@@ -8,7 +7,6 @@ import {
   getPostSummariesInteractor,
 } from '../../di/container'
 import { markdown2react } from '../../utils/markdown'
-import { MetaTags } from '../../components/MetaTags'
 import { Layout } from '../../components/Layout'
 import { Meta } from '../../components/Meta'
 
@@ -21,8 +19,6 @@ type Props = {
 }
 
 const Component: NextPage<Props> = ({ post }) => {
-  const imageData = post.coverImage?.responsiveImage
-
   return (
     <>
       <Meta description={post.excerpt} title={post.title} type="article" />
@@ -33,12 +29,6 @@ const Component: NextPage<Props> = ({ post }) => {
         <div className="mb-4 text-slate-400 text-center tracking-wide">
           {post.date}
         </div>
-        <MetaTags metaTags={post.metaTags} />
-        {imageData && (
-          <div>
-            <Image data={imageData} />
-          </div>
-        )}
         <div>{markdown2react(post.content)}</div>
       </Layout>
     </>
