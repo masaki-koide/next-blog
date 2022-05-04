@@ -33,7 +33,7 @@
     "unified": "9.2.2"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "7.17.8",
+    "@babel/plugin-proposal-decorators": "7.17.9",
     "@graphql-codegen/add": "3.1.1",
     "@graphql-codegen/cli": "2.3.1",
     "@graphql-codegen/introspection": "2.1.1",
