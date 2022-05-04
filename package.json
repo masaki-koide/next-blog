@@ -8,10 +8,11 @@
     "dev": "next-remote-watch ./content",
     "graphql-codegen": "graphql-codegen -r dotenv/config",
     "install": "yarn codegen",
-    "json-schema-codegen": "curl -sS https://qiita.com/api/v2/schema | yarn json2ts -o ./src/generated/qiita.ts --bannerComment '/* eslint-disable */'",
-    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "json-schema-codegen": "curl -sS https://qiita.com/api/v2/schema | yarn json2ts -o src/generated/qiita.ts --bannerComment '/* eslint-disable */'",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
     "prepare": "husky install",
     "start": "next start",
+    "svg": "npx @svgr/cli --out-dir src/components/icons --typescript -- public/icons && yarn eslint 'src/components/icons/*.{ts,tsx}' --fix",
     "type-check": "tsc"
   },
   "dependencies": {
