@@ -4,6 +4,16 @@ import { Unserializable } from './common/unserializable'
 import { CoverImage, CoverImageDto } from './coverImage'
 import { MetaTag, MetaTagDto } from './metaTag'
 
+type PostInput = {
+  slug: string
+  title: string
+  date: string
+  excerpt: string
+  content: string
+  coverImage: NonNullable<PostBySlugQuery['post']>['coverImage']
+  metaTags: NonNullable<PostBySlugQuery['post']>['metaTags']
+}
+
 export type PostDto = {
   slug: string
   title: string
@@ -29,8 +39,7 @@ export class Post implements Unserializable<PostDto> {
 
   #metaTags: MetaTag[]
 
-  // FIXME:GraphQLに依存させない
-  constructor(post: NonNullable<PostBySlugQuery['post']>) {
+  constructor(post: PostInput) {
     if (
       !post.slug ||
       !post.title ||
@@ -59,7 +68,9 @@ export class Post implements Unserializable<PostDto> {
     return {
       slug: this.#slug,
       title: this.#title,
-      date: this.#date.toLocaleDateString(),
+      date: `${this.#date.getFullYear()}/${
+        this.#date.getMonth() + 1
+      }/${this.#date.getDate()}`,
       excerpt: this.#excerpt,
       content: this.#content,
       coverImage: this.#coverImage?.toObject() ?? null,

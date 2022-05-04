@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { AppProps } from 'next/app'
-import 'normalize.css'
-import 'highlight.js/styles/github.css'
+import '../styles/global.css'
+import 'highlight.js/styles/github-dark.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <Component {...pageProps} />
