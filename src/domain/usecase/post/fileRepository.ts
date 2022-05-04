@@ -40,7 +40,7 @@ export class FilePostRepository implements PostRepository {
     const posts = paths
       .map(path => {
         const { data, excerpt } = FilePostRepository.getPostByFilePath(path)
-        if (process.env.NODE_ENV === 'production' && !data.draft) {
+        if (process.env.NODE_ENV === 'production' && data.draft) {
           return null
         }
 
