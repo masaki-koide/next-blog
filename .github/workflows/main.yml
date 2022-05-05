@@ -1,0 +1,17 @@
+name: main CI
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  tweet:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [16]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get Status
+        run: git diff-tree --no-commit-id --name-status -r $GITHUB_SHA | grep '^A.*\.md$' | sed -r "s/^.+\/(.+).md\$/ブログ投稿ーー！ https:\/\/markey-dev.com\/posts\/\1/"
