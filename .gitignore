@@ -36,3 +36,6 @@ graphql.schema.json
 
 # husky
 .husky/_
+
+# feed
+/public/feed

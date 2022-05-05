@@ -6,6 +6,7 @@ import { PostSummaryDto } from '../domain/entity/postSummary'
 import { Layout } from '../components/Layout'
 import { Meta } from '../components/Meta'
 import { ExternalLink } from '../components/icons'
+import { generateFeed } from '../utils/feed'
 
 type Props = {
   posts: PostSummaryDto[]
@@ -59,6 +60,8 @@ const Home: NextPage<Props> = ({ posts }) => {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const posts = await getPostSummariesInteractor.handle()
+
+  generateFeed(posts)
 
   return {
     props: { posts },
