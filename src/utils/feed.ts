@@ -21,9 +21,6 @@ export function generateFeed(posts: PostSummaryDto[]) {
     id: DOMAIN,
     link: DOMAIN,
     language: 'ja',
-    image: `https://og-image.markey-dev.com/${encodeURIComponent(
-      TITLE
-    )}.jpeg?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F34389937`,
     favicon: `${DOMAIN}/favicon.ico`,
     copyright: 'All rights reserved 2022, markey',
     feedLinks: {
@@ -45,9 +42,6 @@ export function generateFeed(posts: PostSummaryDto[]) {
       content: `<a href="${url}">続きを読む</a>`,
       author: [author],
       date: new Date(post.date),
-      image: `https://og-image.markey-dev.com/${encodeURIComponent(
-        post.title
-      )}.jpeg?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Favatars.githubusercontent.com%2Fu%2F34389937`,
     })
   })
 
