@@ -29,6 +29,19 @@ export function Meta({
       <link href={url} rel="canonical" />
       <link href="/favicon.ico" rel="icon" />
 
+      <link
+        href="/feed/atom.xml"
+        rel="alternate"
+        title="Atom1.0"
+        type="application/atom+xml"
+      />
+      <link
+        href="/feed/rss.xml"
+        rel="alternate"
+        title="RSS2.0"
+        type="application/rss+xml"
+      />
+
       <meta content={description} name="description" />
       <meta content={description} property="og:description" />
       <meta content={pageTitle} property="og:title" />
@@ -36,7 +49,6 @@ export function Meta({
       <meta content={url} property="og:url" />
       <meta content={type} property="og:type" />
       <meta content={ogImageUrl} property="og:image" />
-
       <meta content="summary_large_image" name="twitter:card" />
       <meta content="@markey_koichan" name="twitter:site" />
     </Head>
