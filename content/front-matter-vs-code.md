@@ -2,8 +2,8 @@
 title: VSCodeでブログを書く
 slug: front-matter-vs-code
 date: 2022-05-05T07:10:21.837Z
-lastmod: 2022-05-05T08:42:31.362Z
-draft: true
+lastmod: 2022-05-05T12:58:26.549Z
+draft: false
 tags: []
 categories: []
 ---
