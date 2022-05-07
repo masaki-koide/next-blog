@@ -9,6 +9,7 @@ import rehypeReact from 'rehype-react'
 
 import { Anchor } from '../components/Anchor'
 import { H1, H2, H3 } from '../components/Heading'
+import { UnorderedList } from '../components/UnorderedList'
 import { ListItem } from '../components/ListItem'
 import { Paragraph } from '../components/Paragraph'
 import { Blockquote } from '../components/Blockquote'
@@ -27,6 +28,7 @@ const proceccor = unified()
       h1: H1,
       h2: H2,
       h3: H3,
+      ul: UnorderedList,
       li: ListItem,
       p: Paragraph,
       blockquote: Blockquote,
