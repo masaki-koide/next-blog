@@ -12,6 +12,7 @@ import { H1, H2, H3 } from '../components/Heading'
 import { ListItem } from '../components/ListItem'
 import { Paragraph } from '../components/Paragraph'
 import { Blockquote } from '../components/Blockquote'
+import { Img } from '../components/Img'
 
 const proceccor = unified()
   .use(remarkParse)
@@ -29,6 +30,7 @@ const proceccor = unified()
       li: ListItem,
       p: Paragraph,
       blockquote: Blockquote,
+      img: Img,
     },
   })
 
