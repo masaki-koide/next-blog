@@ -1,4 +1,5 @@
 {
   "frontMatter.preview.host": "http://localhost:3000/posts",
-  "frontMatter.framework.startCommand": "yarn dev"
+  "frontMatter.framework.startCommand": "yarn dev",
+  "frontMatter.content.autoUpdateDate": true
 }
