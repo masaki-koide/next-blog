@@ -39,3 +39,7 @@ graphql.schema.json
 
 # feed
 /public/feed
+
+# sitemap
+/public/sitemap*.xml
+/public/robots.txt

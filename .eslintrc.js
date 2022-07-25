@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['thai-soup'],
-  ignorePatterns: ['.eslintrc.js', 'babel.config.js'],
+  ignorePatterns: ['.eslintrc.js'],
   parserOptions: {
     project: './tsconfig.json',
   },
