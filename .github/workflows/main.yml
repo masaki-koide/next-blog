@@ -25,8 +25,7 @@ jobs:
       - if: env.TWITTER_TEXT != ''
         run: |
           twurl authorize --bearer --consumer-key $TWITTER_CONSUMER_KEY --consumer-secret $TWITTER_CONSUMER_SECRET
-          ls -l ~/.twurlrc
-          twurl -t --bearer --consumer-key $TWITTER_CONSUMER_KEY -d "status=$TWITTER_TEXT" /1.1/statuses/update.json
+          twurl -t --bearer --consumer-key $TWITTER_CONSUMER_KEY -d "text=$TWITTER_TEXT" /2/tweets
         env:
           TWITTER_TEXT: ${{ steps.get-text.outputs.text }}
           TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
