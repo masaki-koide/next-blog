@@ -2,8 +2,8 @@
 title: 人は口実を欲している
 slug: people-need-an-excuse
 date: 2022-07-24T14:43:42.400Z
-lastmod: 2022-07-24T14:49:46.403Z
-draft: true
+lastmod: 2022-07-25T02:38:10.700Z
+draft: false
 tags: []
 categories: []
 ---
