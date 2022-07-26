@@ -66,6 +66,7 @@ export class QiitaPostRepository implements PostRepository {
           title: item.title,
           date: item.created_at,
           excerpt: `${item.body.slice(0, 50)}...`,
+          tags: item.tags.map(i => i.name),
           externalSite: true,
           url: item.url,
         })

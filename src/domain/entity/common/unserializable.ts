@@ -1,11 +1,10 @@
-type Serializable = {
+type Serializable = string | number | boolean | null
+type SerializableObject = {
   [key in string]:
-    | string
-    | number
-    | boolean
-    | null
     | Serializable
     | Array<Serializable>
+    | SerializableObject
+    | Array<SerializableObject>
 }
 
 /**
@@ -15,6 +14,6 @@ type Serializable = {
  * したがって、このinterfaceを実装することで、Serializableなオブジェクトに変換するメソッドの実装を強制させる。
  * @see https://github.com/vercel/next.js/issues/11993#issuecomment-617937409
  */
-export interface Unserializable<T extends Serializable> {
+export interface Unserializable<T extends SerializableObject> {
   toObject(): T
 }

@@ -5,6 +5,7 @@ type PostSummaryInput = {
   title: string
   date: string
   excerpt: string
+  tags: string[]
 } & (
   | {
       externalSite: true
@@ -20,6 +21,7 @@ export type PostSummaryDto = {
   title: string
   date: string
   excerpt: string
+  tags: string[]
   externalSite: boolean
   url: string | null
 }
@@ -32,12 +34,20 @@ export class PostSummary implements Unserializable<PostSummaryDto> {
 
   #excerpt: string
 
+  #tags: string[]
+
   #externalSite: boolean
 
   #url: string | null
 
   constructor(post: PostSummaryInput) {
-    if (!post.slug || !post.title || !post.date || !post.excerpt) {
+    if (
+      !post.slug ||
+      !post.title ||
+      !post.date ||
+      !post.excerpt ||
+      !post.tags
+    ) {
       throw Error(`Invalid post data: ${JSON.stringify(post)}`)
     }
 
@@ -45,6 +55,7 @@ export class PostSummary implements Unserializable<PostSummaryDto> {
     this.#title = post.title
     this.#date = new Date(post.date)
     this.#excerpt = post.excerpt
+    this.#tags = post.tags
     this.#externalSite = post.externalSite ?? false
     this.#url = post.externalSite ? post.url : null
   }
@@ -57,6 +68,7 @@ export class PostSummary implements Unserializable<PostSummaryDto> {
         this.#date.getMonth() + 1
       }/${this.#date.getDate()}`,
       excerpt: this.#excerpt,
+      tags: this.#tags,
       externalSite: this.#externalSite,
       url: this.#url,
     }
