@@ -1,13 +1,9 @@
 name: main CI
-on:
-  push:
-    branches:
-      - master
-    paths:
-      - 'content/**.md'
+on: [deployment_status]
 
 jobs:
   tweet:
+    if: ${{ github.event.deployment_status.state == 'success' && github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -15,7 +11,7 @@ jobs:
           fetch-depth: 0
       - id: get-text
         run: |
-          text=$(git diff-tree -m --no-commit-id --name-status -r HEAD | grep '^A.*\.md$' | sed -r "s/^.+\/(.+).md\$/ブログ投稿ーー！ https:\/\/markey-dev.com\/posts\/\1/")
+          text=$(git diff-tree -m --no-commit-id --name-status -r HEAD | grep '^A.*content\/.*\.md$' | sed -r "s/^.+\/(.+).md\$/書いたよ https:\/\/markey-dev.com\/posts\/\1/")
           echo "::set-output name=text::$text"
       - if: env.TEXT != ''
         uses: snow-actions/tweet@v1.2.0
