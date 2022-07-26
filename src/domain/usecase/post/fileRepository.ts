@@ -48,6 +48,7 @@ export class FilePostRepository implements PostRepository {
           slug: data.slug,
           title: data.title,
           date: data.date,
+          tags: data.tags ?? [],
           excerpt,
         })
       })

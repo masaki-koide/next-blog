@@ -38,6 +38,7 @@ export class GqlPostRepository implements PostRepository {
           title: post.title ?? '',
           date: post.date,
           excerpt: post.excerpt ?? '',
+          tags: [],
         })
     )
 
