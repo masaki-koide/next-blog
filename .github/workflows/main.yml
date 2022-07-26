@@ -3,7 +3,8 @@ on: [deployment_status]
 
 jobs:
   tweet:
-    if: github.event.deployment_status.state == 'success' && github.event.deployment.ref == 'master'
+    # run only main branch
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Prorduction'
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
