@@ -1,4 +1,4 @@
-name: main CI
+name: Deployment Status
 on: [deployment_status]
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - id: get-text
         run: |
-          text=$(git diff-tree -m --no-commit-id --name-status -r HEAD | grep '^A.*content\/.*\.md$' | sed -r "s/^.+\/(.+).md\$/書いたよ https:\/\/markey-dev.com\/posts\/\1/")
+          text=$(git diff-tree -m --no-commit-id --name-status -r HEAD | grep '^A.*content\/.*\.md$' | sed -r "s/^.+\/(.+)\.md\$/書いたよ https:\/\/markey-dev.com\/posts\/\1/")
           echo "::set-output name=text::$text"
       - if: env.TEXT != ''
         uses: snow-actions/tweet@v1.2.0
