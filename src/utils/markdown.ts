@@ -2,10 +2,8 @@ import React from 'react'
 import unified from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- 型定義が存在しない
-// @ts-expect-error
-import rehypeHighlight from 'rehype-highlight'
 import rehypeReact from 'rehype-react'
+import rehypeHighlight from 'rehype-highlight'
 
 import { Anchor } from '../components/Anchor'
 import { H1, H2, H3 } from '../components/Heading'
@@ -18,6 +16,8 @@ import { Img } from '../components/Img'
 const proceccor = unified()
   .use(remarkParse)
   .use(remarkRehype)
+  // eslint-disable-next-line -- rehypeHighlightの型がおかしい
+  // @ts-expect-error
   .use(rehypeHighlight)
   .use(rehypeReact, {
     createElement: React.createElement,
