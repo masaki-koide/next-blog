@@ -1,5 +1,5 @@
 import React from 'react'
-import unified from 'unified'
+import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import rehypeReact from 'rehype-react'
@@ -16,14 +16,12 @@ import { Img } from '../components/Img'
 const proceccor = unified()
   .use(remarkParse)
   .use(remarkRehype)
-  // eslint-disable-next-line -- rehypeHighlightの型がおかしい
-  // @ts-expect-error
   .use(rehypeHighlight)
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- rehype-reactの型が曖昧なため
+  // @ts-expect-error
   .use(rehypeReact, {
     createElement: React.createElement,
     components: {
-      // eslint-disable-next-line -- rehypeReactの型が曖昧なため
-      // @ts-expect-error
       a: Anchor,
       h1: H1,
       h2: H2,
