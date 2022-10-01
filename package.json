@@ -65,5 +65,10 @@
     "*.{ts.tsx}": "eslint --fix",
     "*.graphql": "prettier --write",
     "package.json": "prettier-package-json --write"
+  },
+  "nextBundleAnalysis": {
+    "budget": 102400,
+    "budgetPercentIncreaseRed": 10,
+    "showDetails": true
   }
 }
