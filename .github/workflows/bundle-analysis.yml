@@ -12,6 +12,11 @@ defaults:
     # change this if your nextjs app does not live at the root of the repo
     working-directory: ./
 
+env:
+  CMS_API_URL: ${{ secrets.CMS_API_URL }}
+  CMS_API_TOKEN: ${{ secrets.CMS_API_TOKEN }}
+  QIITA_API_TOKEN: ${{ secrets.QIITA_API_TOKEN }}
+
 jobs:
   analyze:
     timeout-minutes: 10
