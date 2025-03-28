@@ -42,7 +42,7 @@
     "@graphql-codegen/typescript": "2.4.2",
     "@graphql-codegen/typescript-graphql-request": "4.3.3",
     "@graphql-codegen/typescript-operations": "2.2.2",
-    "@next/bundle-analyzer": "12.3.1",
+    "@next/bundle-analyzer": "12.3.7",
     "@types/glob": "8.0.0",
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
